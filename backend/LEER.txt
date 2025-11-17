@@ -1,0 +1,8 @@
+Colecciones:
+
+- Usuario
+- Denuncio
+- Siniestro
+- Auto
+- Taller
+- Grua
