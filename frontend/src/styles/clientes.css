@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+.formulario_clientes
+{
+    color: white;
+    margin: auto;
+    background-color: rgb(23, 23, 23);
+    width: 80%;
+    height: 100%;
+    border-radius: 5px;
+    padding-bottom: 15px;
+        font-family: 'Montserrat', sans-serif;
+
+
+}
+
+
+.formulario_clientes::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5); 
+    z-index: -1;
+    pointer-events: none;
+}
+.formulario_clientes h2
+{
+    text-align: center;
+    padding-top: 20px;
+
+}
+
+
+.formulario_clientes .contenedor, .formulario_clientes .contenedor_campos
+{
+    margin-left: 20px;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.formulario_clientes form label
+{
+    font-size: 20px;
+    font-weight: 500;
+    
+}
+
+
+.formulario_clientes form .response
+{
+    border-color: rgb(56, 56, 56);
+    border-style: solid;
+    color: white;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 18px;
+    background-color: #232323;
+    padding-left: 10px;
+}
+
+.campoprueba
+{
+    width: 45%;
+}
+
+.contenedor_campos
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.boton_registrar
+{
+    border-color: rgb(56, 56, 56);
+    border-style: solid;
+    color: white;
+    width: 40%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #e0a000;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+.boton_registrar:hover
+{
+
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px 0px #e0a000;
+}

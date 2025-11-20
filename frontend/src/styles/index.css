@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
+::selection {
+    background: rgb(37, 37, 37);   /* Fondo negro */
+    color: #fff;        /* Texto blanco */
+}
+body {
+    background-color: rgb(255, 255, 255);
+    font-family: 'Oswald', sans-serif;
+    color: rgb(240, 240, 240);
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+}
+
+
+main {
+    color: rgb(47, 47, 47);
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 70vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.borde_nav {
+    background-color: rgb(37, 37, 37);
+    padding: 5px 20px;
+    border-bottom: 1px solid rgb(117, 117, 117);
+}
+
+.header {
+    
+    align-items: center;
+    display: flex;
+    padding: 15px 0;
+  
+}
+
+.header section {
+    display: flex;
+    margin-left: auto;
+}
+
+.header img {
+    
+    height: 40px;
+    width: auto;
+}
+
+.info_navbar {
+    width: 300px;
+    font-weight: lighter;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-shadow: 0px 0px 5px black;
+    font-size: 8px;
+    gap: 20px;
+}
+
+
+
+.icono {
+  width: 40px;
+  height: 40px;
+  fill: #FCB615;
+}
+
+
+.info_navbar img {
+    height: auto;
+    width: auto;
+    padding-right: 30px;
+    fill: rgb(252, 182, 21);
+}
+
+
+
+.navbar ul {
+    border-top: 1px solid rgb(117, 117, 117);
+    display: flex;
+    align-items: stretch;     
+    justify-content: stretch; 
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0;
+    width: 100%;              
+    overflow: hidden;
+ 
+
+}
+
+.navbar li {
+    margin-right: 50px;
+}
+
+.navbar a {
+    display: flex;
+    justify-content: center;  
+    width: 100%;              
+    padding: 10px 0px;
+
+    
+    font-size: 20px;
+    color: rgb(240, 240, 240);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.navbar a:hover {
+    color: rgb(252, 182, 21);
+    text-shadow: 0px 0px 1px rgb(252, 182, 21);
+
+}
+
+.navbar a.active {
+    color: rgb(252, 182, 21);
+    text-shadow: 0px 0px 1px rgb(252, 182, 21);
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    gap: 20px;
+    
+}
+
+.dashboard-card {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 30%;
+}
+
+.dashboard-card h3 {
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.dashboard-card p {
+    color: #555;
+    font-size: 1.1rem;
+}
+
+
+footer {
+    background-color: rgb(37, 37, 37);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    font-size: 1rem;
+}
+
+footer span {
+    font-weight: bold;
+}
+
+footer p {
+    margin: 5px;
+    font-size: 0.9rem;
+}

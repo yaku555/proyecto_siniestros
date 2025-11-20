@@ -1,0 +1,36 @@
+/* Estilo base del botón */
+.btn {
+  position: relative;
+  background-color: #FCB615;
+  color: white; 
+  padding: 10px 40px;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden; 
+  border: none;
+  margin: 0 auto; 
+  z-index: 1;
+  text-decoration: none;
+;
+}
+
+/* Efecto de transición de color de izquierda a derecha */
+.btn::before {
+  content: ''; 
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(37, 37, 37); 
+  transition: left 0.4s ease;
+    z-index: -1;
+}
+
+/* Al pasar el cursor sobre el botón */
+.btn:hover::before {
+  left: 0; 
+}
+

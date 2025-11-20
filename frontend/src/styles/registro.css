@@ -1,0 +1,54 @@
+/* ---------- Registro: tarjeta contenedora ---------- */
+.registro-card {
+  background-color: rgb(245, 245, 245);
+  color: rgb(37, 37, 37);
+  padding: 15px 20px;
+  margin: 20px auto;
+  box-shadow: 0px 0px 10px 5px rgba(112,112,112,0.2);
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  border-left: 5px solid #FCB615;
+  border-radius: 4px;
+}
+
+/* ---------- Grid del formulario ---------- */
+.registro-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.registro-row {
+  display: grid;
+  gap: 14px;
+}
+.registro-row.one { grid-template-columns: 1fr; }
+.registro-row.two { grid-template-columns: 1fr 1fr; }
+
+.registro-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: rgb(37, 37, 37);
+}
+
+.registro-textarea {
+  resize: vertical;
+}
+
+.registro-divider {
+  border: none;
+  border-top: 1px dashed rgba(37,37,37,0.15);
+  margin: 6px 0 8px;
+}
+
+/* ---------- Acciones ---------- */
+.registro-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* reutiliza tus clases globales .filtro, .btn, .hint de index.css */
