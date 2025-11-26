@@ -21,6 +21,11 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/GestionarDen" className={({ isActive }) => (isActive ? "active" : "")}>
+            GESTIONAR DENUNCIOS
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/ReportesBI" className={({ isActive }) => (isActive ? "active" : "")}>
             REPORTES BI
           </NavLink>

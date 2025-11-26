@@ -1,51 +1,107 @@
 // src/pages/RegistrarSin.jsx
 import { useState } from "react";
-import { crearSiniestro } from "../api/siniestro"; // Importa la función registrarSiniestro
+import { crearDenuncio } from "../api/denuncio"; // Función para registrar siniestro
+
+const initialFormData = {
+  poliza: "",
+  rut: "",
+  direccionSin: "",
+  comunaSin: "",
+  detalles: "",
+};
 
 export default function RegistrarSin() {
-  const [formData, setFormData] = useState({
-    idSiniestro: "",
-    poliza: "",
-    rut: "",
-    direccionSin: "",
-    comunaSin: "",
-    idTaller: "",
-    idGrua: "",
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Datos del formulario:", formData); // Verifica los datos antes de enviarlos
+
     try {
-      const result = await crearSiniestro(formData); // Llama a la función para registrar el siniestro
-      alert("Siniestro registrado con éxito.");
-      setFormData({}); // Limpia el formulario después de agregar
+      const result = await crearDenuncio(formData); // Enviamos todos los datos al backend
+      console.log("Respuesta backend:", result); // Muestra la respuesta del backend
+
+      alert("Denuncio registrado con éxito.");
+      setFormData(initialFormData); // Resetea el formulario
     } catch (err) {
-      console.error(err);
-      alert("Error al registrar el siniestro.");
+      console.error("Error al registrar el denuncio:", err); // Muestra el error completo
+      alert("Error al registrar el denuncio.");
     }
   };
 
   return (
     <main>
-      <h1>Registrar Siniestro</h1>
+      <h1>Registrar Denuncio</h1>
+
       <form onSubmit={handleSubmit}>
-        <label htmlFor="idSiniestro">ID Siniestro</label>
-        <input
-          type="text"
-          id="idSiniestro"
-          name="idSiniestro"
-          value={formData.idSiniestro}
-          onChange={handleChange}
-        />
-        {/* Agrega los otros campos del formulario de manera similar */}
+        <div>
+          <label htmlFor="poliza">Póliza</label>
+          <input
+            type="text"
+            id="poliza"
+            name="poliza"
+            value={formData.poliza}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="rut">RUT Asegurado</label>
+          <input
+            type="text"
+            id="rut"
+            name="rut"
+            value={formData.rut}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="direccionSin">Dirección del siniestro</label>
+          <input
+            type="text"
+            id="direccionSin"
+            name="direccionSin"
+            value={formData.direccionSin}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="comunaSin">Comuna del siniestro</label>
+          <input
+            type="text"
+            id="comunaSin"
+            name="comunaSin"
+            value={formData.comunaSin}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="detalles">Detalles del siniestro</label>
+          <input
+            type="text"
+            id="detalles"
+            name="detalles"
+            value={formData.detalles}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <button type="submit">Registrar</button>
       </form>
     </main>

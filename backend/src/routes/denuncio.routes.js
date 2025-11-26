@@ -3,7 +3,7 @@ const { Router } = require('express');
 const {
   getDenuncios,
   crearDenuncio,
-  getDenuncioPorPoliza,
+  getDenuncioPorId,
   actualizarDenuncio,
   borrarDenuncio
 } = require('../controllers/denuncio.controller');
@@ -12,8 +12,8 @@ const router = Router();
 
 router.get('/', getDenuncios);          
 router.post('/', crearDenuncio);   
-router.get('/:poliza', getDenuncioPorPoliza);   
-router.put('/:poliza', actualizarDenuncio);    
-router.delete('/:poliza', borrarDenuncio);  
+router.get('/:idDenuncio', getDenuncioPorId);   
+router.put('/:idDenuncio', actualizarDenuncio);    
+router.delete('/:idDenuncio', borrarDenuncio);  
 
 module.exports = router;

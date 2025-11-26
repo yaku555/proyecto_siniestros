@@ -45,4 +45,16 @@ const siniestroSchema = new Schema(
     }
 );
 
+siniestroSchema.virtual('usuario', {
+  ref: 'Usuario',          // nombre del modelo
+  localField: 'rut',       // campo en Denuncio
+  foreignField: 'rut',     // campo en Usuario
+  justOne: true,           // un solo usuario por rut
+});
+
+// Para que los virtuals aparezcan en JSON
+siniestroSchema.set('toJSON', { virtuals: true });
+siniestroSchema.set('toObject', { virtuals: true });
+
+
 module.exports = model('Siniestro', siniestroSchema);

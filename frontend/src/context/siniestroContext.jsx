@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { getSiniestros, crearSiniestro } from "../api/siniestro"; // Asegúrate de que la ruta esté correcta
+import { getSiniestros, crearSiniestro, actualizarSiniestro } from "../api/siniestro"; // Asegúrate de que la ruta esté correcta
 
 const SiniestroContext = createContext();
 
@@ -45,8 +45,28 @@ export function SiniestroProvider({ children }) {
     }
   };
 
+  // Función para actualizar un siniestro
+  const actualizarSiniestroContext = async (idSiniestro, updatedData) => {
+    try {
+      const res = await actualizarSiniestro(idSiniestro, updatedData);
+      if (res) {
+        // Actualiza el siniestro en el contexto
+        setSiniestros((prevSiniestros) =>
+          prevSiniestros.map((siniestro) =>
+            siniestro.idSiniestro === idSiniestro
+              ? { ...siniestro, ...updatedData }
+              : siniestro
+          )
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Error al actualizar el siniestro.");
+    }
+  };
+
   return (
-    <SiniestroContext.Provider value={{ siniestros, loading, error, agregarSiniestro: agregarSiniestroContext }}>
+    <SiniestroContext.Provider value={{ siniestros, loading, error, agregarSiniestro: agregarSiniestroContext, actualizarSiniestro: actualizarSiniestroContext }}>
       {children}
     </SiniestroContext.Provider>
   );

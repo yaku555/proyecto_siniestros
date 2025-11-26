@@ -1,28 +1,79 @@
-// Se importa el modelo de Siniestro desde la carpeta 'models'.
-const Siniestro = require('../models/Siniestro');
+// src/controllers/siniestro.controller.js
+const Siniestro = require('../models/Siniestro');  // Importa el modelo de Mongoose
+const { getSiniestroData } = require('../utils/getDatas.js'); // Importa la función para obtener los datos
+const Usuario = require('../models/Usuario');  // 👈 importa el modelo Usuario
 
-// Se importa el controlador base que gestiona las operaciones CRUD comunes (crear, obtener, actualizar, eliminar).
-const createCrudController = require('./baseCrud.controller');
 
-// Se importa la función getSiniestroData que se encarga de extraer los datos necesarios de la solicitud.
-const { getSiniestroData } = require('../utils/getDatas.js');
+// Función para crear un nuevo siniestro
+const crearSiniestro = async (req, res) => {
+  try {
+    const { poliza, rut, direccionSin, comunaSin, idTaller, idGrua, estadoSiniestro } = req.body;
 
-// Se crea un controlador CRUD utilizando la función 'createCrudController'. 
-// Esta función genera los métodos básicos (getAll, create, getById, update, remove) para trabajar con el modelo 'Siniestro'.
-const {
-  getAll: getSiniestros,              // Obtener todos los siniestros
-  create: crearSiniestro,             // Crear un nuevo siniestro
-  getById: getSiniestroPorId,         // Obtener un siniestro por su 'idSiniestro'
-  update: actualizarSiniestro,        // Actualizar un siniestro existente
-  remove: borrarSiniestro,            // Eliminar un siniestro
-} = createCrudController(Siniestro, getSiniestroData, 'idSiniestro', 'idSiniestro');
+    // Obtener el último siniestro registrado (el de ID más alto)
+    const ultimoSiniestro = await Siniestro.findOne().sort({ idSiniestro: -1 });  // Obtiene el último siniestro por ID
 
-// Se exportan los métodos del controlador CRUD para que puedan ser utilizados en otros archivos.
-module.exports = {
-  getSiniestros,          // Función para obtener todos los siniestros
-  crearSiniestro,         // Función para crear un nuevo siniestro
-  getSiniestroPorId,      // Función para obtener un siniestro por su 'idSiniestro'
-  actualizarSiniestro,    // Función para actualizar un siniestro
-  borrarSiniestro,        // Función para eliminar un siniestro
+    // Generar el siguiente ID para el nuevo siniestro
+    let nuevoIdSiniestro = 'S001';  // Si no hay siniestros previos, comenzamos con 'S001'
+    if (ultimoSiniestro) {
+      const ultimoId = ultimoSiniestro.idSiniestro;  // El último ID registrado
+      const numero = parseInt(ultimoId.substring(1));  // Extraemos el número del ID
+      nuevoIdSiniestro = 'S' + (numero + 1).toString().padStart(3, '0');  // Generamos el siguiente ID
+    }
+
+    // Creamos un nuevo siniestro con el ID generado
+    const nuevoSiniestro = new Siniestro({
+      idSiniestro: nuevoIdSiniestro,
+      poliza,
+      rut,
+      direccionSin,
+      comunaSin,
+      idTaller:  idTaller ||'N/A',
+      idGrua: idGrua  || 'N/A',
+      estadoSiniestro: estadoSiniestro || 'INGRESADO', // Si no se pasa estadoSiniestro, asignamos 'pendiente'
+    });
+
+    // Guardamos el nuevo siniestro en la base de datos
+    const savedSiniestro = await nuevoSiniestro.save();
+
+    // Respondemos con el siniestro recién guardado
+    res.status(201).json(savedSiniestro);
+  } catch (error) {
+    console.error("Error al registrar el siniestro:", error); // Logueamos el error
+    res.status(500).json({ error: 'Hubo un problema al registrar el siniestro.' });
+  }
 };
 
+// 👇 Nuevo getDenuncios con populate de usuario
+const getSiniestros = async (req, res) => {
+  try {
+    const siniestros = await Siniestro.find().lean();
+
+    siniestros.forEach(d => console.log(`ID: ${d.idSiniestro} - RUT: ${d.rut}`));
+
+    const siniestrosConUsuario = await Siniestro.find().populate('usuario').lean();
+
+    console.log("🟦 Resultado de populate:");
+    siniestrosConUsuario.forEach(d => {
+      console.log(`\nDenuncio ${d.idSiniestro}`);
+      console.log("RUT:", d.rut);
+      console.log("Usuario encontrado:", d.usuario);
+    });
+
+    res.json(siniestrosConUsuario);
+  } catch (error) {
+    console.error("Error al obtener los denuncios:", error);
+    res.status(500).json({ error: 'Hubo un problema al obtener los denuncios.' });
+  }
+};
+
+
+// El resto de los métodos CRUD siguen igual
+const {update: actualizarSiniestro, getById: getSiniestroPorId, remove: borrarSiniestro } = require('./baseCrud.controller')(Siniestro, getSiniestroData, 'idSiniestro', 'idSiniestro');
+
+module.exports = {
+  getSiniestros,
+  crearSiniestro,
+  getSiniestroPorId,
+  actualizarSiniestro,
+  borrarSiniestro,
+};

@@ -9,8 +9,8 @@ const getVehiculoData = (body) => {
 };
 
 const getDenuncioData = (body) => {
-  const { poliza, rut, direccionSin, comunaSin, detalles, estadoDenuncio } = body;
-  return { poliza, rut, direccionSin, comunaSin, detalles, estadoDenuncio  };
+  const { idDenuncio, poliza, rut, direccionSin, comunaSin, detalles, estadoDenuncio } = body;
+  return { idDenuncio, poliza, rut, direccionSin, comunaSin, detalles, estadoDenuncio  };
 };
 
 
