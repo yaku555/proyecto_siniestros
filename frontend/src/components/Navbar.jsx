@@ -14,10 +14,10 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink to="/RegistrarSin" className={({ isActive }) => (isActive ? "active" : "")}>
-            REGISTRAR SINIESTRO
+            REGISTRAR DENUNCIO
           </NavLink>
         </li>
-       
+
         {isAuthenticated && usuario?.rol === "EJECUTIVO" && (
           <>
             <li>
@@ -31,7 +31,7 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/ReportesBI" className={({ isActive }) => (isActive ? "active" : "")}>
+              <NavLink to="/reportesBI" className={({ isActive }) => (isActive ? "active" : "")}>
                 REPORTES BI
               </NavLink>
             </li>

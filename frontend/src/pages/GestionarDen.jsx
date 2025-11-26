@@ -7,8 +7,8 @@ export default function GestionarDen() {
   const { denuncios, loading, error, actualizarEstadoDenuncio, borrarDenuncio } = useDenuncios(); // Accede al estado global de los siniestros
   const { agregarSiniestro } = useSiniestros(); // Accede a la función para agregar un siniestro
   
-  const [modalMessage, setModalMessage] = useState(""); // Para almacenar el mensaje del modal
-  const [showModal, setShowModal] = useState(false); // Para controlar la visibilidad del modal
+  const [notifMessage, setNotifMessage] = useState(""); // Para almacenar el mensaje del modal
+  const [showNotif, setShowNotif] = useState(false); // Para controlar la visibilidad del modal
 
   // Función para obtener el color de la tarjeta según el estado
   const getCardColor = (estado) => {
@@ -25,13 +25,13 @@ export default function GestionarDen() {
   };
 
   // Función para mostrar el modal con el mensaje
-  const mostrarModal = (mensaje) => {
-    setModalMessage(mensaje);
-    setShowModal(true);
+  const mostrarNotif = (mensaje) => {
+    setNotifMessage(mensaje);
+    setShowNotif(true);
 
     // Después de 3 segundos, ocultamos el modal
     setTimeout(() => {
-      setShowModal(false);
+      setShowNotif(false);
     }, 3000); // Duración total del modal (3 segundos)
   };
 
@@ -61,9 +61,9 @@ export default function GestionarDen() {
       borrarDenuncio(idDenuncio);
 
       // Mostramos el mensaje del modal
-      mostrarModal(`Cambio de estado a ${nuevoEstado} y siniestro creado correctamente`);
+      mostrarNotif(`Cambio de estado a ${nuevoEstado} y siniestro creado correctamente`);
     } else {
-      mostrarModal(`Cambio de estado a ${nuevoEstado} realizado correctamente`);
+      mostrarNotif(`Cambio de estado a ${nuevoEstado} realizado correctamente`);
     }
   };
 
@@ -150,10 +150,10 @@ export default function GestionarDen() {
       )}
 
       {/* Modal para mostrar el mensaje */}
-      {showModal && (
+      {showNotif && (
         <div className="notif">
           <img src="https://i.pinimg.com/originals/e8/06/52/e80652af2c77e3a73858e16b2ffe5f9a.gif" alt="Loading..." className="gif-progress" />
-          <p>{modalMessage}</p>
+          <p>{notifMessage}</p>
         </div>
       )}
     </main>
