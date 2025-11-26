@@ -1,7 +1,9 @@
 // src/components/Header.jsx
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 import ContactInfo from "./ContactInfo";
-import LoginLink from "./LoginLink";
+import UserLink from "./UserLink"; // Importamos el nuevo componente
 
 export default function Header() {
   return (
@@ -9,7 +11,8 @@ export default function Header() {
       <img src={logo} alt="Logo" style={{ borderRadius: "5px" }} />
       <section className="header-info">
         <ContactInfo />
-        <LoginLink />
+        <UserLink /> {/* Aquí agregamos el UserLink que maneja login y logout */}
+        
       </section>
     </div>
   );

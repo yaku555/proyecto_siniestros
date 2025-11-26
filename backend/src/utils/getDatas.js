@@ -1,6 +1,6 @@
 const getUsuarioData = (body) => {
-  const { nombre, apellido, rut, telefono, email, comuna, licencia, tipo_usuario } = body;
-  return { nombre, apellido, rut, telefono, email, comuna, licencia, tipo_usuario };
+  const { nombre, apellido, rut, telefono, email, comuna, licencia, rol, password } = body;
+  return { nombre, apellido, rut, telefono, email, comuna, licencia, rol, password };
 };
 
 const getVehiculoData = (body) => {

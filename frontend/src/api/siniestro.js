@@ -36,3 +36,13 @@ export const actualizarSiniestro = (idSiniestro, updatedData) => {
       throw error;
     });
 };
+
+
+export const getSiniestrosPorRut = (rut) => {
+  return axios.get(`/siniestros/usuario/${rut}`)
+    .then((response) => response.data) // Devuelve solo los datos
+    .catch((error) => {
+      console.error('Error al obtener los siniestros:', error);
+      throw error;  // Lanza el error
+    });
+};

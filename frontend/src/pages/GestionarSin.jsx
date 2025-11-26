@@ -223,8 +223,8 @@ export default function GestionarSin() {
                 <div style={{ textAlign: "right" }}>
                   <p><strong>ID Taller:</strong> {s.idTaller}</p>
                   <p><strong>ID Grúa:</strong> {s.idGrua}</p>
-                  <p><strong>Dirección siniestro:</strong> {s.direccionSin}</p>
-                  <p><strong>Comuna siniestro:</strong> {s.comunaSin}</p>
+                  <p><strong>Dirección siniestro:</strong> {s.direccionSin}, {s.comunaSin}</p>
+                 
                   <p><strong>Fecha: </strong> {new Date(s.createdAt).toLocaleDateString('es-CL')}</p>
                 </div>
               </div>

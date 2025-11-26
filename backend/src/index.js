@@ -13,12 +13,13 @@ const mongoose = require('mongoose');
 
 const cors =  require('cors');
 // Se importan las rutas correspondientes para cada recurso de la API.
-const userRoutes = require('./routes/usuario.routes.js');
+const usuarioRoutes = require('./routes/usuario.routes.js');
 const vehiculoRoutes = require('./routes/vehiculo.routes.js');
 const denuncioRoutes = require('./routes/denuncio.routes.js');
 const siniestroRoutes = require('./routes/siniestro.routes.js');
 const tallerRoutes = require('./routes/taller.routes.js');
 const gruaRoutes = require('./routes/grua.routes.js');
+const authRoutes = require('./routes/auth.routes');
 
 // Se importan middlewares para manejar errores y solicitudes no encontradas.
 const notFound = require('./middleware/notFound');
@@ -38,12 +39,13 @@ app.use(morgan('dev'));               // Usar 'morgan' para registrar las solici
 app.use(express.json());              // Middleware para analizar las solicitudes con contenido JSON.
 
 // Rutas: Se definen las rutas principales para cada entidad de la API.
-app.use('/api/usuarios', userRoutes);    // Ruta para manejar operaciones de usuarios.
+app.use('/api/usuarios', usuarioRoutes);    // Ruta para manejar operaciones de usuarios.
 app.use('/api/vehiculos', vehiculoRoutes); // Ruta para manejar operaciones de vehículos.
 app.use('/api/denuncios', denuncioRoutes); // Ruta para manejar operaciones de denuncios.
 app.use('/api/siniestros', siniestroRoutes); // Ruta para manejar operaciones de siniestros.
 app.use('/api/talleres', tallerRoutes);    // Ruta para manejar operaciones de talleres.
 app.use('/api/gruas', gruaRoutes);        // Ruta para manejar operaciones de grúas.
+app.use('/api/auth', authRoutes);
 
 // Middleware para manejar rutas no encontradas (404).
 app.use(notFound);

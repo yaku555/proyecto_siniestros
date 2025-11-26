@@ -66,6 +66,22 @@ const getSiniestros = async (req, res) => {
   }
 };
 
+// Función para obtener siniestros por RUT
+const getSiniestrosPorRut = async (req, res) => {
+  try {
+    const { rut } = req.params; // Obtener el RUT desde los parámetros de la URL
+    const siniestros = await Siniestro.find({ rut }).lean(); // Filtra los siniestros por el RUT
+
+    if (!siniestros) {
+      return res.json([]);
+    }
+
+    res.status(200).json(siniestros); // Devuelve el array de siniestros
+  } catch (error) {
+    console.error("Error al obtener los siniestros:", error);
+    res.status(500).json({ error: 'Hubo un problema al obtener los siniestros.' });
+  }
+};
 
 // El resto de los métodos CRUD siguen igual
 const {update: actualizarSiniestro, getById: getSiniestroPorId, remove: borrarSiniestro } = require('./baseCrud.controller')(Siniestro, getSiniestroData, 'idSiniestro', 'idSiniestro');
@@ -76,4 +92,5 @@ module.exports = {
   getSiniestroPorId,
   actualizarSiniestro,
   borrarSiniestro,
+  getSiniestrosPorRut, // Exporta la nueva función
 };

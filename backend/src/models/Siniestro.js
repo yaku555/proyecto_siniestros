@@ -36,6 +36,7 @@ const siniestroSchema = new Schema(
             type: String,
             required: true,
         },
+        
 
     },
     {
